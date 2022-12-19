@@ -89,18 +89,15 @@ public class VendingMachine
             {
                 case "1":
                     Console.Clear();
-                    ShowLiquidProducts();
-                    WhatDoYouWantToBuy(inventory);
+                    ShowLiquidProducts(inventory);
                     break;
                 case "2":
                     Console.Clear();
-                    ShowMealProducts();
-                    WhatDoYouWantToBuy(inventory);
+                    ShowMealProducts(inventory);
                     break;
                 case "3":
                     Console.Clear();
-                    ShowRoughWeatherProducts();
-                    WhatDoYouWantToBuy(inventory);
+                    ShowRoughWeatherProducts(inventory);
                     break;
                 case "Q":
                     Console.Clear();
@@ -115,15 +112,19 @@ public class VendingMachine
         }
     }
     
-    public void WhatDoYouWantToBuy(Inventory inventory)
+    public bool AskToBuy(int index, Inventory inventory)
     {
-        Console.WriteLine("Select what item you want to buy or go back with [Q]? [1/2/3]");
+        Console.WriteLine("Do you want to buy this item? [Y/N]");
         var buyChoise = Console.ReadLine();
-        if (buyChoise != "Q")
+        
+        if (buyChoise is "Y" or "y")
         {
-            var buyChoiseInt = int.Parse(buyChoise);
-            Buy(buyChoiseInt-1, inventory);
+            Console.Clear();
+            Buy(index, inventory);
+            return true;
         }
+        
+        return false;
     }
 
     public bool Buy(int index, Inventory inventory)
@@ -135,7 +136,6 @@ public class VendingMachine
             item.Buy();
             inventory.items.Add(item);
             _moneyInMachine -= item.Price;
-            //Items.Remove(item);
             return true;
         }
         
@@ -248,30 +248,100 @@ public class VendingMachine
     }
 
     //Method to show liquid products
-    public void ShowLiquidProducts()
+    public void ShowLiquidProducts(Inventory inventory)
     {
         Console.WriteLine("Liquid Products");
-        Console.WriteLine($"[1] {Items[0].Name}: {Items[0].Price}kr - {Items[0]._Description}");
-        Console.WriteLine($"[2] {Items[1].Name}: {Items[1].Price}kr - {Items[1]._Description}");
-        Console.WriteLine($"[3] {Items[2].Name}: {Items[2].Price}kr - {Items[2]._Description}");
+        Console.WriteLine($"[1] {Items[0].Name}: {Items[0].Price}kr");
+        Console.WriteLine($"[2] {Items[1].Name}: {Items[1].Price}kr");
+        Console.WriteLine($"[3] {Items[2].Name}: {Items[2].Price}kr");
+        Console.WriteLine("Choose item to show the description: ");
+        var valAvVara = Console.ReadLine();
+        switch (valAvVara?.ToUpper())
+        {
+            case "1":
+                Console.WriteLine($"{Items[0]._Description}");
+                AskToBuy(0, inventory);
+                break;
+            case "2":
+                Console.WriteLine($"{Items[1]._Description}");
+                AskToBuy(1, inventory);
+                break;
+            case "3":
+                Console.WriteLine($"{Items[2]._Description}");
+                AskToBuy(2, inventory);
+                break;
+            case "Q":
+                Console.Clear();
+                return;
+            default:
+                Console.WriteLine("Your input was not valid, Please try again");
+                break;
+        }
+        
     }
 
     //Method to show meal products
-    public void ShowMealProducts()
+    public void ShowMealProducts(Inventory inventory)
     {
         Console.WriteLine("Meal Products");
-        Console.WriteLine($"[4] {Items[3].Name}: {Items[3].Price}kr - {Items[3]._Description}");
-        Console.WriteLine($"[5] {Items[4].Name}: {Items[4].Price}kr - {Items[4]._Description}");
-        Console.WriteLine($"[6] {Items[5].Name}: {Items[5].Price}kr - {Items[5]._Description}");
+        Console.WriteLine($"[1] {Items[3].Name}: {Items[3].Price}kr");
+        Console.WriteLine($"[2] {Items[4].Name}: {Items[4].Price}kr");
+        Console.WriteLine($"[3] {Items[5].Name}: {Items[5].Price}kr");
+        Console.WriteLine("Choose item to show the description: ");
+        var valAvVara = Console.ReadLine();
+        switch (valAvVara?.ToUpper())
+        {
+            case "1":
+                Console.WriteLine($"{Items[3]._Description}");
+                AskToBuy(3, inventory);
+                break;
+            case "2":
+                Console.WriteLine($"{Items[4]._Description}");
+                AskToBuy(4, inventory);
+                break;
+            case "3":
+                Console.WriteLine($"{Items[5]._Description}");
+                AskToBuy(5, inventory);
+                break;
+            case "Q":
+                Console.Clear();
+                return;
+            default:
+                Console.WriteLine("Your input was not valid, Please try again");
+                break;
+        }
     }
 
     //Method to show rough weather products
-    public void ShowRoughWeatherProducts()
+    public void ShowRoughWeatherProducts(Inventory inventory)
     {
         Console.WriteLine("Rough Weather Products");
-        Console.WriteLine($"[7] {Items[6].Name}: {Items[6].Price}kr - {Items[6]._Description}");
-        Console.WriteLine($"[8] {Items[7].Name}: {Items[7].Price}kr - {Items[7]._Description}");
-        Console.WriteLine($"[9] {Items[8].Name}: {Items[8].Price}kr - {Items[8]._Description}");
+        Console.WriteLine($"[1] {Items[6].Name}: {Items[6].Price}kr");
+        Console.WriteLine($"[2] {Items[7].Name}: {Items[7].Price}kr");
+        Console.WriteLine($"[3] {Items[8].Name}: {Items[8].Price}kr");
+        Console.WriteLine("Choose item to show the description: ");
+        var valAvVara = Console.ReadLine();
+        switch (valAvVara?.ToUpper())
+        {
+            case "1":
+                Console.WriteLine($"{Items[6]._Description}");
+                AskToBuy(6, inventory);
+                break;
+            case "2":
+                Console.WriteLine($"{Items[7]._Description}");
+                AskToBuy(7, inventory);
+                break;
+            case "3":
+                Console.WriteLine($"{Items[8]._Description}");
+                AskToBuy(8,inventory);
+                break;
+            case "Q":
+                Console.Clear();
+                return;
+            default:
+                Console.WriteLine("Your input was not valid, Please try again");
+                break;
+        }
     }
 
 }

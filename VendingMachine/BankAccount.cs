@@ -42,7 +42,7 @@ public class BankAccount
         }
         catch (Exception e)
         {
-            throw new Exception("JAG KOMMER HIT");
+            throw new Exception("Invalid money type");
         }
         return false;
 
