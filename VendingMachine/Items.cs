@@ -1,63 +1,54 @@
 ﻿namespace VendingMachine;
 
 
-interface IItem
+interface IItem //Interface for items
 {
-    void Buy();
-    void Use();
-    string Description();
+    void Buy(); //Method for buying items
+    void Use(); //Method for using items
+    string Description(); //Method for getting the description of the item
 }
 
-public abstract class Item : IItem
+public abstract class Item : IItem //Abstract class that inherits from the interface
 {
-    public string Name { get; set; }
-    public string _Description { get; set; }
-    public int Price { get; set; }
+    public string Name { get; set; } //Property for the name of the item
+    public string _Description { get; set; } //Property for the description of the item
+    public int Price { get; set; } //Property for the price of the item
     
-    abstract public void Buy();
-    abstract public void Use();
+    abstract public void Buy(); //Abstract method for buying items
+    abstract public void Use(); //Abstract method for using items
     
-    public string Description()
+    public string Description() //Method for getting the description of the item
     {
-        return _Description;
+        return _Description; //Returns the description of the item
     }
     
-    public Item(string name, string description, int price)
+    public Item(string name, string description, int price) //Constructor for the item
     {
-        Name = name;
-        _Description = description;
-        Price = price;
+        Name = name; //Sets the name of the item
+        _Description = description; //Sets the description of the item
+        Price = price; //Sets the price of the item
     }
 }
 
-class LiquidItem : Item
+class Coffee : Item //Class for the coffee item that inherits from the item class
 {
-    public LiquidItem(string name, string description, int price) : base(name, description, price) {}
+    public Coffee(string name, string description, int price) : base(name, description, price) {} //Constructor for the coffee item
     
-    public override void Buy() { Console.WriteLine("You bought a " + Name); }
+    public override void Buy() { Console.WriteLine("You bought a " + Name); } //Method for buying the coffee item
     
-    public override void Use() { Console.WriteLine("You drank the " + Name); }
+    public override void Use() { Console.WriteLine("You drank the " + Name); } //Method for using the coffee item
 }
 
-class Coffee : Item
+class Milk : Item //Class for the milk item that inherits from the item class
 {
-    public Coffee(string name, string description, int price) : base(name, description, price) {}
+    public Milk(string name, string description, int price) : base(name, description, price) {} //Constructor for the milk item
     
-    public override void Buy() { Console.WriteLine("You bought a " + Name); }
+    public override void Buy() { Console.WriteLine("You bought a " + Name); } //Method for buying the milk item
     
-    public override void Use() { Console.WriteLine("You drank the " + Name); }
+    public override void Use() { Console.WriteLine("You drank the " + Name); } //Method for using the milk item
 }
 
-class Milk : Item
-{
-    public Milk(string name, string description, int price) : base(name, description, price) {}
-    
-    public override void Buy() { Console.WriteLine("You bought a " + Name); }
-    
-    public override void Use() { Console.WriteLine("You drank the " + Name); }
-}
-
-class Pepsi : Item
+class Pepsi : Item 
 {
     public Pepsi(string name, string description, int price) : base(name, description, price) {}
     
