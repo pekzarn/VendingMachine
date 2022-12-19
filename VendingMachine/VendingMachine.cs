@@ -276,8 +276,8 @@ public class VendingMachine
                 break;
         }
         
-    } 
-    
+    }
+
     public void ShowMealProducts(Inventory inventory) //Method to show meal products
     {
         Console.WriteLine("Meal Products");
@@ -307,8 +307,9 @@ public class VendingMachine
                 Console.WriteLine("Your input was not valid, Please try again");
                 break;
         }
-    } 
-    
+        
+    }
+
     public void ShowRoughWeatherProducts(Inventory inventory) //Method to show rough weather products
     {
         Console.WriteLine("Rough Weather Products");
